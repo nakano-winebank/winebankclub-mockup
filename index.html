@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WineBank CLUB | レストラン仕入価格相当でワインを楽しむ会員制サービス</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+  body { font-family: 'Noto Sans JP', sans-serif; background:#0b0f1a; color:#e8e6df; }
+  .serif { font-family: 'Cormorant Garamond', serif; }
+  .navy-bg { background: radial-gradient(ellipse at top, #101a33 0%, #060910 70%); }
+  .card-glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(212,175,90,0.18);
+  }
+  .gold-text { color: #d4af5a; }
+  .gold-grad { background: linear-gradient(135deg, #f3d98a 0%, #d4af5a 45%, #a9793a 100%); }
+  .gold-border { border-color: #d4af5a; }
+  .btn-gold {
+    background: linear-gradient(135deg, #f3d98a 0%, #d4af5a 50%, #b8903f 100%);
+    color: #10131c; font-weight: 700;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -8px rgba(212,175,90,0.55); }
+  .btn-outline-gold {
+    border: 1px solid rgba(212,175,90,0.6); color:#f3d98a;
+    transition: background .2s ease;
+  }
+  .btn-outline-gold:hover { background: rgba(212,175,90,0.1); }
+  .plan-black { background: linear-gradient(160deg, #1a1a1a 0%, #000 100%); border: 1px solid #d4af5a; }
+  .divider-gold { height:1px; background: linear-gradient(90deg, transparent, rgba(212,175,90,0.6), transparent); }
+  .sticky-table th, .sticky-table td { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .table-scroll::-webkit-scrollbar { height: 6px; }
+  .table-scroll::-webkit-scrollbar-thumb { background: rgba(212,175,90,0.4); border-radius: 4px; }
+  .badge-standard { background: rgba(148,163,184,0.15); color:#cbd5e1; }
+  .badge-gold { background: rgba(212,175,90,0.15); color:#f3d98a; }
+  .badge-black { background: rgba(255,255,255,0.08); color:#fff; }
+  .badge-corp { background: rgba(96,165,250,0.15); color:#93c5fd; }
+  .price-strike { text-decoration: line-through; color:#8b8b8b; }
+  .fade-line { background: linear-gradient(180deg, transparent, rgba(212,175,90,0.4), transparent); width:1px; }
+</style>
+</head>
+<body class="navy-bg">
+
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#06090f]/80 border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="serif text-2xl font-bold gold-text tracking-wide">WineBank</span>
+      <span class="text-xs tracking-[0.3em] text-white/50 mt-1">CLUB</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-white/70">
+      <a href="#benefits" class="hover:text-white transition">選ばれる理由</a>
+      <a href="#plans" class="hover:text-white transition">料金プラン</a>
+      <a href="#stores" class="hover:text-white transition">店舗</a>
+      <a href="#faq" class="hover:text-white transition">FAQ</a>
+    </nav>
+    <a href="#plans" class="btn-gold text-sm px-5 py-2.5 rounded-full">入会する</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative pt-40 pb-28 px-6 overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/winebankclub/fastview.jpg');"></div>
+  <div class="absolute inset-0 bg-[#060910]/80"></div>
+  <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 30% 20%, rgba(212,175,90,0.25), transparent 45%), radial-gradient(circle at 80% 60%, rgba(96,120,220,0.18), transparent 50%);"></div>
+  <div class="max-w-4xl mx-auto text-center relative">
+    <p class="text-xs tracking-[0.4em] gold-text mb-6">MEMBERSHIP FOR WINE LOVERS</p>
+    <h1 class="serif text-4xl md:text-6xl font-bold leading-tight mb-6">
+      月に<span class="font-sans">1</span>本以上ワインを飲む方、<br class="hidden md:block">必見。
+    </h1>
+    <p class="text-lg md:text-xl text-white/80 mb-4">レストラン仕入価格相当で、上質なワインを楽しむ。</p>
+    <p class="text-sm text-white/50 max-w-xl mx-auto mb-10 leading-relaxed">
+      メーカー希望小売価格から約30%OFF相当。オーパス・ワンやヴーヴ・クリコなど、憧れの一本を気軽な価格で。
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#plans" class="btn-gold px-8 py-3.5 rounded-full text-sm">料金プランを見る</a>
+      <a href="#benefits" class="btn-outline-gold px-8 py-3.5 rounded-full text-sm">サービスを知る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3 Benefits -->
+<section id="benefits" class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">3 REASONS</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">選ばれる3つの理由</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <img src="/images/winebankclub/winelife_01.jpg" alt="" class="w-full h-44 object-cover">
+        <div class="p-8">
+          <div class="text-4xl font-bold gold-text mb-4">01</div>
+          <h3 class="font-bold text-lg mb-3">レストラン仕入価格相当で楽しめる</h3>
+          <p class="text-sm text-white/60 leading-relaxed">ヴーヴ・クリコやオーパス・ワンなど有名銘柄を、メーカー希望小売価格の約30%OFFでご注文いただけます。一般的なレストラン価格より圧倒的にお得です。</p>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <img src="/images/winebankclub/winelife_02.jpg" alt="" class="w-full h-44 object-cover">
+        <div class="p-8">
+          <div class="text-4xl font-bold gold-text mb-4">02</div>
+          <h3 class="font-bold text-lg mb-3">10種類以上をグラスで飲み比べ</h3>
+          <p class="text-sm text-white/60 leading-relaxed">インポーター直営だからこそ実現できる、常時10種類以上のグラスワイン。希少銘柄との出会いも、新しいお気に入り探しも自由自在。</p>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <img src="/images/winebankclub/winelife_03.jpg" alt="" class="w-full h-44 object-cover">
+        <div class="p-8">
+          <div class="text-4xl font-bold gold-text mb-4">03</div>
+          <h3 class="font-bold text-lg mb-3">未使用分もマーケットプレイスで還元</h3>
+          <p class="text-sm text-white/60 leading-relaxed">その月にレストランを利用できなくても、翌月に月額費分の割引を付与。マーケットプレイスで購入したワインをお店に直送することも可能です。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Concept -->
+<section class="py-20 px-6 border-t border-white/5">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+    <div class="rounded-2xl overflow-hidden">
+      <img src="/images/winebankclub/about.jpg" alt="" class="w-full h-full object-cover">
+    </div>
+    <div>
+      <p class="text-xs tracking-[0.4em] gold-text mb-4">CONCEPT</p>
+      <p class="serif text-2xl md:text-3xl leading-relaxed">
+        レストランのワインは、仕入原価の2〜3倍が一般的。<br>
+        私たちは<span class="gold-text">「仕入原価相当で楽しめるレストラン」</span>を作りたいと考えました。
+      </p>
+      <p class="text-sm text-white/50 mt-6 leading-relaxed">
+        仕入れ原価1万円のワインが、レストランでは2〜3万円になるのが通例です。WineBank CLUBは、より多くの方にワインを気軽に楽しんでもらうために生まれた月額会員制サービスです。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Sommelier Recommendation -->
+<section class="py-20 px-6 border-t border-white/5">
+  <div class="max-w-4xl mx-auto card-glass rounded-2xl p-10 md:p-14">
+    <p class="text-xs tracking-[0.4em] gold-text mb-6">SOMMELIER'S VOICE</p>
+    <p class="text-lg leading-relaxed mb-8">
+      「ワインは好きでよく買うけど、持ち込みで飲めるところが意外とない、持ち込みってお店に気を使う…って思ってる方多いと思います。それが無料で持ち込めて、かつ会員特典で試飲会があったり、希少ボトルも購入できる。グラスワインも豊富なので1人でしっぽり飲んだり、仲間内でワイン会をするのには最高のサービスです!」
+    </p>
+    <div class="flex items-center gap-4">
+      <img src="/images/winebankclub/sommelier.jpg" alt="井黒卓氏" class="w-14 h-14 rounded-full object-cover object-top">
+      <div>
+        <p class="font-bold">井黒 卓 <span class="text-white/50 font-normal text-sm">Taku Iguro</span></p>
+        <p class="text-xs text-white/50">TACTICAL WINE CONSULTANT代表 / ミシュラン★★★ロオジエ ワイン・ディレクター</p>
+        <p class="text-xs text-white/50">日本ソムリエ協会 理事</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wine price comparison -->
+<section class="py-20 px-6 border-t border-white/5">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">PRICE EXAMPLE</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">これだけお得に</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="card-glass rounded-xl p-5 text-center">
+        <img src="/images/winebankclub/wine01.png" alt="オーパス・ワン" class="h-32 mx-auto mb-3 object-contain">
+        <p class="text-xs text-white/50 mb-1">カリフォルニア</p>
+        <p class="font-bold text-sm mb-4">オーパス・ワン</p>
+        <p class="price-strike text-sm">¥119,600</p>
+        <p class="serif text-2xl font-bold gold-text">¥59,800</p>
+      </div>
+      <div class="card-glass rounded-xl p-5 text-center">
+        <img src="/images/winebankclub/wine02.png" alt="クリュッグ" class="h-32 mx-auto mb-3 object-contain">
+        <p class="text-xs text-white/50 mb-1">シャンパーニュ</p>
+        <p class="font-bold text-sm mb-4">クリュッグ キュヴェ ブリュット</p>
+        <p class="price-strike text-sm">¥61,000</p>
+        <p class="serif text-2xl font-bold gold-text">¥30,500</p>
+      </div>
+      <div class="card-glass rounded-xl p-5 text-center">
+        <img src="/images/winebankclub/wine03.png" alt="ケンゾー エステイト" class="h-32 mx-auto mb-3 object-contain">
+        <p class="text-xs text-white/50 mb-1">カリフォルニア</p>
+        <p class="font-bold text-sm mb-4">ケンゾー エステイト 紫鈴</p>
+        <p class="price-strike text-sm">¥31,900</p>
+        <p class="serif text-2xl font-bold gold-text">¥15,590</p>
+      </div>
+      <div class="card-glass rounded-xl p-5 text-center">
+        <img src="/images/winebankclub/wine00.png" alt="ヴーヴ・クリコ" class="h-32 mx-auto mb-3 object-contain">
+        <p class="text-xs text-white/50 mb-1">シャンパーニュ</p>
+        <p class="font-bold text-sm mb-4">ヴーヴ・クリコ</p>
+        <p class="price-strike text-sm">¥12,540</p>
+        <p class="serif text-2xl font-bold gold-text">¥6,270</p>
+      </div>
+      <div class="card-glass rounded-xl p-5 text-center">
+        <img src="/images/winebankclub/wine04.png" alt="ボランジェ" class="h-32 mx-auto mb-3 object-contain">
+        <p class="text-xs text-white/50 mb-1">シャンパーニュ</p>
+        <p class="font-bold text-sm mb-4">ボランジェ スペシャル キュベ</p>
+        <p class="price-strike text-sm">¥16,600</p>
+        <p class="serif text-2xl font-bold gold-text">¥8,300</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section id="plans" class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">MEMBERSHIP PLAN</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold mb-4">料金プラン</h2>
+      <p class="text-sm text-white/50">ライフスタイルに合わせて選べる4つのステータス</p>
+    </div>
+
+    <!-- Plan cards (mobile-friendly summary) -->
+    <div class="grid md:grid-cols-4 gap-5 mb-16">
+      <!-- STANDARD -->
+      <div class="card-glass rounded-2xl p-6 flex flex-col">
+        <span class="badge-standard text-xs px-3 py-1 rounded-full w-fit mb-4">STANDARD</span>
+        <p class="serif text-3xl font-bold mb-1">¥8,800<span class="text-sm font-normal text-white/50">/月</span></p>
+        <p class="text-xs text-white/40 mb-6">税込</p>
+        <ul class="text-sm text-white/70 space-y-2 mb-8 flex-1">
+          <li>・ワイン代半額（上限5万円/回）</li>
+          <li>・同伴4名まで（本人含む）</li>
+          <li>・ワインBYO無料 月1本まで</li>
+        </ul>
+        <a href="#" class="btn-outline-gold text-center text-sm py-2.5 rounded-full">選択する</a>
+      </div>
+      <!-- GOLD -->
+      <div class="card-glass rounded-2xl p-6 flex flex-col relative gold-border" style="border-width:1.5px;">
+        <span class="absolute -top-3 right-6 gold-grad text-[#10131c] text-xs font-bold px-3 py-1 rounded-full">人気</span>
+        <span class="badge-gold text-xs px-3 py-1 rounded-full w-fit mb-4">GOLD</span>
+        <p class="serif text-3xl font-bold mb-1">¥22,000<span class="text-sm font-normal text-white/50">/月</span></p>
+        <p class="text-xs text-white/40 mb-6">税込</p>
+        <ul class="text-sm text-white/70 space-y-2 mb-8 flex-1">
+          <li>・ワイン代半額（上限なし）</li>
+          <li>・同伴人数 無制限</li>
+          <li>・個室利用（terrace無料）</li>
+          <li>・ワインBYO無料 月2本まで</li>
+          <li>・セラー利用権 6本まで</li>
+        </ul>
+        <a href="#" class="btn-gold text-center text-sm py-2.5 rounded-full">選択する</a>
+      </div>
+      <!-- BLACK -->
+      <div class="plan-black rounded-2xl p-6 flex flex-col">
+        <span class="badge-black text-xs px-3 py-1 rounded-full w-fit mb-4">BLACK</span>
+        <p class="serif text-3xl font-bold mb-1">¥660,000<span class="text-sm font-normal text-white/50">/年</span></p>
+        <p class="text-xs text-white/40 mb-6">税込・年会費</p>
+        <ul class="text-sm text-white/70 space-y-2 mb-8 flex-1">
+          <li>・ワイン代半額（上限なし）</li>
+          <li>・同伴人数 無制限</li>
+          <li>・個室利用（terrace無料）</li>
+          <li>・ワインBYO 無制限</li>
+          <li>・セラー利用権 12本まで</li>
+        </ul>
+        <a href="#" class="btn-outline-gold text-center text-sm py-2.5 rounded-full">選択する</a>
+      </div>
+      <!-- CORPORATE -->
+      <div class="card-glass rounded-2xl p-6 flex flex-col">
+        <span class="badge-corp text-xs px-3 py-1 rounded-full w-fit mb-4">法人</span>
+        <p class="serif text-3xl font-bold mb-1">¥33,000<span class="text-sm font-normal text-white/50">/月〜</span></p>
+        <p class="text-xs text-white/40 mb-6">税込・利用回数に応じて2プラン</p>
+        <ul class="text-sm text-white/70 space-y-2 mb-8 flex-1">
+          <li>・5回/月（¥33,000）または10回/月（¥55,000）</li>
+          <li>・ドリンク全品半額（上限5万円/回）</li>
+          <li>・同伴人数 無制限</li>
+          <li>・ワインBYO無料 月2本まで</li>
+          <li>・贈答用ワイン選定・手配可</li>
+        </ul>
+        <a href="#" class="btn-outline-gold text-center text-sm py-2.5 rounded-full">選択する</a>
+      </div>
+    </div>
+
+    <!-- Full comparison table -->
+    <div class="card-glass rounded-2xl p-2 md:p-4">
+      <div class="table-scroll overflow-x-auto">
+        <table class="sticky-table w-full min-w-[720px] text-sm">
+          <thead>
+            <tr class="text-left text-white/50">
+              <th class="py-4 px-4 font-medium">項目</th>
+              <th class="py-4 px-4 font-medium"><span class="badge-standard text-xs px-2 py-1 rounded-full">STANDARD</span></th>
+              <th class="py-4 px-4 font-medium"><span class="badge-gold text-xs px-2 py-1 rounded-full">GOLD</span></th>
+              <th class="py-4 px-4 font-medium"><span class="badge-black text-xs px-2 py-1 rounded-full">BLACK</span></th>
+              <th class="py-4 px-4 font-medium"><span class="badge-corp text-xs px-2 py-1 rounded-full">法人</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-4 px-4 text-white/60">月額会費</td>
+              <td class="py-4 px-4 font-bold">¥8,800</td>
+              <td class="py-4 px-4 font-bold gold-text">¥22,000</td>
+              <td class="py-4 px-4 font-bold">¥660,000<span class="text-xs text-white/40">/年</span></td>
+              <td class="py-4 px-4 font-bold">¥33,000〜¥55,000</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">レストラン利用回数</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4">5回 または 10回/月</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">ワイン代半額上限</td>
+              <td class="py-4 px-4">5万円/回</td>
+              <td class="py-4 px-4 gold-text">無制限</td>
+              <td class="py-4 px-4">無制限</td>
+              <td class="py-4 px-4">5万円/回</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">同伴可能人数</td>
+              <td class="py-4 px-4">4名まで（本人含む）</td>
+              <td class="py-4 px-4 gold-text">無制限</td>
+              <td class="py-4 px-4">無制限</td>
+              <td class="py-4 px-4">無制限</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">個室利用</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 gold-text">terrace無料</td>
+              <td class="py-4 px-4">terrace無料</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">ワインBYO無料</td>
+              <td class="py-4 px-4">月1本まで</td>
+              <td class="py-4 px-4 gold-text">月2本まで</td>
+              <td class="py-4 px-4">無制限</td>
+              <td class="py-4 px-4">無制限（2本/回まで）</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">ワインセラー利用権</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 gold-text">6本まで</td>
+              <td class="py-4 px-4">12本まで</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-white/60">贈答用ワイン選定・手配</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4 text-white/40">—</td>
+              <td class="py-4 px-4">可能</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="text-xs text-white/40 mt-4 text-center">※法人プランの回数超過分は別途ご相談。ミシュラン掲載店舗は利用回数2回を1回相当で換算します。</p>
+  </div>
+</section>
+
+<!-- Stores -->
+<section id="stores" class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">STORES</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">ご利用可能店舗</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <img src="/images/winebankclub/shoplist_02-01.jpg" alt="Bistro&Bar WineBank terrace" class="w-full h-56 object-cover">
+        <div class="p-8">
+          <h3 class="font-bold text-lg mb-2">Bistro&amp;Bar WineBank terrace</h3>
+          <p class="text-xs gold-text mb-4">六本木</p>
+          <p class="text-sm text-white/60 mb-1">〒107-0052 東京都港区赤坂9丁目7−1</p>
+          <p class="text-sm text-white/60 mb-4">17:00〜23:00（22:30 L.O.）</p>
+          <p class="text-sm text-white/50 leading-relaxed">グラスワインを常時30種類ご用意。開放的なテラス席で、上質なフレンチとのペアリング体験を。</p>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <img src="/images/winebankclub/shoplist_01.jpg" alt="L'atelier de oto" class="w-full h-56 object-cover">
+        <div class="p-8">
+          <h3 class="font-bold text-lg mb-2">L'atelier de oto</h3>
+          <p class="text-xs gold-text mb-4">銀座</p>
+          <p class="text-sm text-white/60 mb-1">〒104-0061 東京都中央区銀座6丁目10−1</p>
+          <p class="text-sm text-white/60 mb-4">17:00〜23:00（22:30 L.O.）</p>
+          <p class="text-sm text-white/50 leading-relaxed">銀座一等地の上質空間で楽しむ、洗練されたひととき。</p>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs text-white/40 mt-6 text-center">※法人会員に関しては、食べログなどのグルメ予約サイトからのご予約は承っておりません。</p>
+  </div>
+</section>
+
+<!-- Voices -->
+<section class="py-20 px-6 border-t border-white/5">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">MEMBER'S VOICE</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">会員様の声</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card-glass rounded-2xl p-8">
+        <p class="text-sm text-white/70 leading-relaxed mb-6">「このサービスに入会してから、ワインの楽しみ方が格段に広がりました。レストランではワインは高いので、今まではあまり飲んでいなかったのですがここではワインがECサイトよりも安いです。しかも品質も抜群なので、本当におすすめです。」</p>
+        <div class="flex items-center gap-3">
+          <img src="/images/winebankclub/user01.jpg" alt="小田垣様" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <p class="text-sm font-bold">小田垣 様</p>
+            <p class="text-xs text-white/40">経営者</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-8">
+        <p class="text-sm text-white/70 leading-relaxed mb-6">「ワインの取扱いは100種類以上！その日の気分やシーンに合わせてワインを選べます。歴史と信頼のあるインポーターさんの良質なワインだから安心。ワインを最良の環境と状態で味わえるのは嬉しいですね！」</p>
+        <div class="flex items-center gap-3">
+          <img src="/images/winebankclub/user02.jpg" alt="MARIN様" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <p class="text-sm font-bold">MARIN 様</p>
+            <p class="text-xs text-white/40">ソムリエ・ワインコンサルタント</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">HOW TO JOIN</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">入会までの流れ</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="relative">
+        <div class="text-3xl gold-text font-bold mb-3">01</div>
+        <h3 class="font-bold text-sm mb-2">プランを選択</h3>
+        <p class="text-xs text-white/50 leading-relaxed">ご希望の会員ステータスのボタンをクリックし、特典や料金を確認。</p>
+      </div>
+      <div class="relative">
+        <div class="text-3xl gold-text font-bold mb-3">02</div>
+        <h3 class="font-bold text-sm mb-2">情報入力・決済方法選択</h3>
+        <p class="text-xs text-white/50 leading-relaxed">お名前・連絡先などを入力し、決済方法を選択。</p>
+      </div>
+      <div class="relative">
+        <div class="text-3xl gold-text font-bold mb-3">03</div>
+        <h3 class="font-bold text-sm mb-2">同意・本人確認・お支払い</h3>
+        <p class="text-xs text-white/50 leading-relaxed">利用規約に同意し、本人確認を済ませてお支払い完了。</p>
+      </div>
+      <div class="relative">
+        <div class="text-3xl gold-text font-bold mb-3">04</div>
+        <h3 class="font-bold text-sm mb-2">確認メールで入会完了</h3>
+        <p class="text-xs text-white/50 leading-relaxed">確認メールを受信したら、正式にWineBank CLUB会員に。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-xs tracking-[0.4em] gold-text mb-3">FAQ</p>
+      <h2 class="serif text-3xl md:text-4xl font-bold">よくあるご質問</h2>
+    </div>
+    <div class="space-y-3">
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">なぜ良いワインを低価格で提供できるのですか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">私たちはワインの輸入業社として直接ワイン生産者と提携し、中間コストを削減することで、高品質なワインをお得に提供しています。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">ワイン初心者でも楽しめますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">はい。わかりやすく説明し、楽しんでいただけるようサポートいたします。お気軽にスタッフにご相談ください。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">追加料金はかかりますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">サービス料・個室料は各店舗に準じますが、その他不当な追加費用を請求することは一切ございません。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">持ち込んだワインはサーブしてくれますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">会員ステータスで定められた本数分まで可能です。心を込めてサーブさせていただきます。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">会員ではない方も入店できますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">非会員の方でも入店可能ですが、会員と非会員で提供価格が異なります。あらかじめご了承ください。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">STANDARD会員が4名で来店した場合の料金は？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">本人1名・同伴者3名の計4名までは、ボトル4本まで会員価格にて提供いたします。同伴可能人数以上での来店はご遠慮しております。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">席は何時間制になりますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">予約来店・直接来店いずれの場合も2時間制になります。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">入会日が8月15日の場合、利用可能期間は？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">利用開始日は入会翌日（8月16日）、利用終了日は入会月の当月末（8月31日）です。以降は1か月ごとに自動更新となります。</p>
+      </details>
+      <details class="card-glass rounded-xl p-5 group">
+        <summary class="font-bold text-sm cursor-pointer flex justify-between items-center list-none">レストランを利用できなかった月はどうなりますか？<span class="gold-text group-open:rotate-45 transition">＋</span></summary>
+        <p class="text-sm text-white/60 mt-4 leading-relaxed">未利用月が発生した場合、翌月に月額費全額分を割引でお戻しします。レストランのお食事代あるいはマーケットプレイスでのワイン代にご利用いただけます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Corporate detail note -->
+<section class="py-16 px-6 border-t border-white/5">
+  <div class="max-w-3xl mx-auto card-glass rounded-2xl p-8 text-center">
+    <p class="text-xs tracking-[0.4em] gold-text mb-3">CORPORATE PLAN</p>
+    <p class="text-sm text-white/60 leading-relaxed mb-4">
+      法人会員プランの詳細（お申込みフォーム・お支払い方法・注意事項）は専用ガイドをご確認ください。
+    </p>
+    <a href="mailto:club@wine-bank.co.jp" class="btn-outline-gold inline-block text-sm px-6 py-2.5 rounded-full">法人プランについて問い合わせる</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-6 border-t border-white/5">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="serif text-3xl md:text-4xl font-bold mb-6">今日から、上質なワイン体験を。</h2>
+    <a href="#plans" class="btn-gold px-10 py-4 rounded-full text-sm inline-block">プランを選んで入会する</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-6 border-t border-white/5 text-center text-xs text-white/40">
+  <p class="mb-2">株式会社WineBank CLUB カスタマーサポート　TEL: 03-6416-9370　Email: club@wine-bank.co.jp</p>
+  <p>飲酒は20歳になってから。妊娠中や授乳期の飲酒はやめましょう。 &copy; WineBank CLUB</p>
+</footer>
+
+</body>
+</html>
